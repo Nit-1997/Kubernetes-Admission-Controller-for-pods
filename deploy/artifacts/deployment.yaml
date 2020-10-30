@@ -1,0 +1,56 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: admission-webhook
+  namespace: kso-control
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+       ntnbhat9/validator: 'true'
+  template:
+    metadata:
+      labels:
+         ntnbhat9/validator: 'true'
+    spec:
+      containers:
+        - name: webhook
+          image: ntnbhat/validator:v0.02
+          imagePullPolicy: Always
+          args:
+            - -alsologtostderr
+            - --log_dir=/
+            - -v=10
+            - 2>&1
+          resources:
+            limits:
+              memory: 50Mi
+              cpu: 300m
+            requests:
+              memory: 00Mi
+              cpu: 300m
+          volumeMounts:
+            - name: webhook-certs
+              mountPath: /etc/certs
+              readOnly: true
+            - name: logs
+              mountPath: /tmp
+      volumes:
+        - name: webhook-certs
+          secret:
+            secretName: admission-webhook
+        - name: logs
+          emptyDir: { }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admission-webhook
+  namespace: kso-control
+spec:
+  selector:
+    ntnbhat9/validator: 'true'
+  ports:
+    - name: webhook
+      port: 443
+      targetPort: 8080

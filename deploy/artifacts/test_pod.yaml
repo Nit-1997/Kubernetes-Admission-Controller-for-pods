@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ktopic-controller1
+spec:
+  containers:
+    - image: busybox
+      name: ktopic-controller1

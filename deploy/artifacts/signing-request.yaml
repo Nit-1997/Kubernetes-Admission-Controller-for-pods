@@ -1,0 +1,10 @@
+apiVersion: certificates.k8s.io/v1beta1
+kind: CertificateSigningRequest
+metadata:
+  name: admission-webhook.kso-control.svc
+spec:
+  # This should contain a base64-encoded, newline-stripped CSR:
+  # e.g. via $(cat server.csr | base64 | tr -d '\n')
+  request: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQldEQ0IvZ0lCQURBc01Tb3dLQVlEVlFRREV5RmhaRzFwYzNOcGIyNHRkMlZpYUc5dmF5NXJjMjh0WTI5dQpkSEp2YkM1emRtTXdXVEFUQmdjcWhrak9QUUlCQmdncWhrak9QUU1CQndOQ0FBUUxteG11d3EwaFlRY2lqemJ2Cm43Ni9NQlZiQ21wNDBQTitQRU5rZ0RIL3V5Z0IrL2xkYnA4bjh5dE90Z0EvalQ4UmR1ckdlR3ZBZXRydW9UUVIKbVlObG9IQXdiZ1lKS29aSWh2Y05BUWtPTVdFd1h6QmRCZ05WSFJFRVZqQlVnaUZoWkcxcGMzTnBiMjR0ZDJWaQphRzl2YXk1cmMyOHRZMjl1ZEhKdmJDNXpkbU9DTDJGa2JXbHpjMmx2YmkxM1pXSm9iMjlyTG10emJ5MWpiMjUwCmNtOXNMbk4yWXk1amJIVnpkR1Z5TG14dlkyRnNNQW9HQ0NxR1NNNDlCQU1DQTBrQU1FWUNJUUREa3doTVNqNUQKNmd1TlVUeTR0K2dSZHBVZGVvZ0hGTzJZcWpGWjRqRTJJUUloQUo4b2hvMnBCcG90WjRodVhpMzJPQU9KZThxdAoxczc1dHBFc1Bnb25vSENFCi0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo="
+  usages:
+    - server auth
